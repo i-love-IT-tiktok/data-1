@@ -85,20 +85,20 @@
     }
 
     /* ============================================================
-       3. MÀN HÌNH END CREDITS (TỰ ĐỘNG LƯỚT LÊN)
+       3. MÀN HÌNH END CREDITS
        ============================================================ */
     #endCredits {
       position: fixed;
       inset: 0;
       z-index: 1000;
-      background: #0a0204; /* Nền tối điện ảnh */
+      background: #0a0204;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow: hidden;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 1.5s ease, visibility 1.5s ease;
+      transition: opacity 1s ease, visibility 1s ease;
     }
 
     #endCredits.active {
@@ -108,81 +108,36 @@
 
     .credits-content {
       position: absolute;
-      top: 100%;
+      top: 100%; /* Bắt đầu từ dưới màn hình */
       width: 100%;
       max-width: 800px;
       text-align: center;
       color: var(--cream);
       padding: 0 20px;
-      /* Animation lướt từ dưới lên: 35 giây */
-      animation: scrollCredits 35s linear forwards;
+      /* 
+       * Tốc độ lướt được tính toán để khớp với JS:
+       * Chiều cao ước tính của khối này rơi vào khoảng 1400px - 1600px
+       * 35 giây để cuộn qua. 
+       */
+      animation: scrollCredits 28s linear forwards;
     }
 
+    /* Lướt từ 100% (dưới màn hình) lên -1200px (trên màn hình) */
     @keyframes scrollCredits {
       0% { transform: translateY(0); }
-      100% { transform: translateY(-1800px); } /* Lướt qua khỏi màn hình */
+      100% { transform: translateY(-1400px); }
     }
 
-    /* Nội dung Credits */
-    .credits-logo {
-      font-size: 3rem;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
+    .credits-logo { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
+    .credits-title { font-family: "Playfair Display", serif; font-size: 2.5rem; color: var(--gold-light); margin-bottom: 10px; }
+    .credits-subtitle { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255, 248, 236, 0.5); margin-bottom: 50px; }
+    .credits-section { margin-bottom: 45px; }
+    .credits-role { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .credits-name { font-family: "Playfair Display", serif; font-size: 1.5rem; color: #fff; margin-bottom: 4px; }
+    .credits-desc { font-size: 0.9rem; color: rgba(255, 248, 236, 0.7); }
+    .credits-heart { color: #ff6b8a; font-size: 1.5rem; margin: 30px 0; animation: heartPulse 2s infinite; }
+    .credits-footer { font-size: 0.8rem; color: rgba(255, 248, 236, 0.4); margin-top: 60px; padding-bottom: 50px;}
 
-    .credits-title {
-      font-family: "Playfair Display", serif;
-      font-size: 2.5rem;
-      color: var(--gold-light);
-      margin-bottom: 10px;
-    }
-
-    .credits-subtitle {
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 248, 236, 0.5);
-      margin-bottom: 50px;
-    }
-
-    .credits-section {
-      margin-bottom: 45px;
-    }
-
-    .credits-role {
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    .credits-name {
-      font-family: "Playfair Display", serif;
-      font-size: 1.5rem;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .credits-desc {
-      font-size: 0.9rem;
-      color: rgba(255, 248, 236, 0.7);
-    }
-
-    .credits-heart {
-      color: #ff6b8a;
-      font-size: 1.5rem;
-      margin: 30px 0;
-      animation: heartPulse 2s infinite;
-    }
-
-    .credits-footer {
-      font-size: 0.8rem;
-      color: rgba(255, 248, 236, 0.4);
-      margin-top: 60px;
-    }
-
-    /* Nút bỏ qua */
     .skip-credits {
       position: absolute;
       bottom: 30px;
@@ -196,12 +151,10 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 999px;
       transition: all 0.3s;
+      cursor: pointer;
     }
     
-    .skip-credits:hover {
-      color: #fff;
-      border-color: #fff;
-    }
+    .skip-credits:hover { color: #fff; border-color: #fff; }
 
     /* ============================================================
        4. OVERLAY MỞ ĐẦU
@@ -216,9 +169,7 @@
       justify-content: center;
       text-align: center;
       padding: 24px;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.18), transparent 60%),
-        linear-gradient(160deg, #6b0818 0%, #8c1029 55%, #560716 100%);
+      background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.18), transparent 60%), linear-gradient(160deg, #6b0818 0%, #8c1029 55%, #560716 100%);
       color: var(--cream);
       transition: opacity 1s var(--ease), visibility 1s var(--ease);
     }
@@ -230,112 +181,31 @@
     }
 
     .intro-inner { max-width: 720px; position: relative; }
-
-    .intro-ribbon {
-      display: inline-block;
-      font-size: clamp(0.7rem, 2.6vw, 0.85rem);
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      border: 1px solid rgba(212, 175, 55, 0.55);
-      border-radius: 999px;
-      padding: 8px 18px;
-      margin-bottom: 26px;
-      background: rgba(212, 175, 55, 0.08);
-      backdrop-filter: blur(4px);
-      animation: introRise 1.1s var(--ease) both;
-    }
-
-    .intro-title {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: clamp(2.1rem, 9vw, 4.4rem);
-      line-height: 1.12;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
-      animation: introRise 1.2s 0.15s var(--ease) both;
-    }
-
+    .intro-ribbon { display: inline-block; font-size: clamp(0.7rem, 2.6vw, 0.85rem); letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-light); border: 1px solid rgba(212, 175, 55, 0.55); border-radius: 999px; padding: 8px 18px; margin-bottom: 26px; background: rgba(212, 175, 55, 0.08); backdrop-filter: blur(4px); animation: introRise 1.1s var(--ease) both; }
+    .intro-title { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(2.1rem, 9vw, 4.4rem); line-height: 1.12; text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35); animation: introRise 1.2s 0.15s var(--ease) both; }
     .intro-title .gold { color: var(--gold); text-shadow: 0 0 28px var(--gold-glow); }
-
-    .intro-sub {
-      margin-top: 18px;
-      font-size: clamp(0.95rem, 3.4vw, 1.15rem);
-      color: rgba(255, 248, 236, 0.85);
-      animation: introRise 1.2s 0.35s var(--ease) both;
-    }
-
-    .intro-btn {
-      margin-top: 38px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 34px;
-      font-weight: 700;
-      font-size: clamp(0.95rem, 3.4vw, 1.05rem);
-      color: var(--red-dark);
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      border-radius: 999px;
-      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
-      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
-      animation: introRise 1.2s 0.55s var(--ease) both;
-    }
-
-    .intro-btn:hover, .intro-btn:focus-visible {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 18px 40px rgba(212, 175, 55, 0.55);
-      outline: none;
-    }
-
+    .intro-sub { margin-top: 18px; font-size: clamp(0.95rem, 3.4vw, 1.15rem); color: rgba(255, 248, 236, 0.85); animation: introRise 1.2s 0.35s var(--ease) both; }
+    .intro-btn { margin-top: 38px; display: inline-flex; align-items: center; gap: 10px; padding: 15px 34px; font-weight: 700; font-size: clamp(0.95rem, 3.4vw, 1.05rem); color: var(--red-dark); background: linear-gradient(135deg, var(--gold-light), var(--gold)); border-radius: 999px; box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4); transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease); animation: introRise 1.2s 0.55s var(--ease) both; }
+    .intro-btn:hover, .intro-btn:focus-visible { transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 40px rgba(212, 175, 55, 0.55); outline: none; }
     .intro-heart { font-size: 1.15em; animation: heartPulse 1.8s ease-in-out infinite; }
 
-    @keyframes introRise {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes heartPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
-    }
+    @keyframes introRise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes heartPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
 
     /* ============================================================
        5. TIỆN ÍCH CHUNG
        ============================================================ */
     main { position: relative; z-index: 1; }
-
     .section { padding: clamp(56px, 9vw, 110px) clamp(18px, 5vw, 48px); position: relative; }
     .container { width: min(1120px, 100%); margin: 0 auto; }
-
-    .section-eyebrow {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--red-soft);
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: clamp(1.7rem, 5.5vw, 2.9rem);
-      line-height: 1.2;
-      color: var(--red-deep);
-    }
-
+    .section-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 14px; }
+    .section-title { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(1.7rem, 5.5vw, 2.9rem); line-height: 1.2; color: var(--red-deep); }
     .section-title .gold { color: var(--gold); text-shadow: 0 0 24px rgba(212, 175, 55, 0.35); }
     .section-desc { margin-top: 14px; max-width: 620px; color: rgba(58, 16, 23, 0.72); font-size: clamp(0.95rem, 3vw, 1.05rem); }
     .center { text-align: center; }
     .center .section-desc { margin-left: auto; margin-right: auto; }
 
-    /* Scroll Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(52px);
-      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-      will-change: opacity, transform;
-    }
+    .reveal { opacity: 0; transform: translateY(52px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); will-change: opacity, transform; }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
     .reveal[data-delay="1"] { transition-delay: 0.1s; }
     .reveal[data-delay="2"] { transition-delay: 0.2s; }
@@ -346,68 +216,18 @@
     /* ============================================================
        6. HERO SECTION
        ============================================================ */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: clamp(90px, 14vh, 150px) clamp(18px, 5vw, 48px) clamp(70px, 10vh, 110px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 8%; left: 50%; transform: translateX(-50%);
-      width: min(680px, 92vw); aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.06) 45%, transparent 70%);
-      filter: blur(10px);
-      pointer-events: none; z-index: -1;
-    }
-
+    .hero { min-height: 100svh; display: flex; align-items: center; justify-content: center; text-align: center; padding: clamp(90px, 14vh, 150px) clamp(18px, 5vw, 48px) clamp(70px, 10vh, 110px); position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; top: 8%; left: 50%; transform: translateX(-50%); width: min(680px, 92vw); aspect-ratio: 1; background: radial-gradient(circle, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.06) 45%, transparent 70%); filter: blur(10px); pointer-events: none; z-index: -1; }
     .hero-ornament { font-size: clamp(1.4rem, 4vw, 1.9rem); color: var(--gold); letter-spacing: 0.5em; margin-bottom: 18px; opacity: 0.85; }
-    .hero-tag {
-      display: inline-block; font-size: clamp(0.68rem, 2.6vw, 0.8rem); font-weight: 700;
-      letter-spacing: 0.34em; text-transform: uppercase; color: var(--red-soft);
-      padding: 8px 20px; border-radius: 999px; background: rgba(212, 175, 55, 0.16);
-      border: 1px solid rgba(212, 175, 55, 0.5); margin-bottom: 22px;
-    }
-
-    .hero-title {
-      font-family: "Playfair Display", serif; font-weight: 700;
-      font-size: clamp(2.3rem, 10vw, 5.2rem); line-height: 1.08;
-      color: var(--red-deep); letter-spacing: -0.01em;
-    }
-
+    .hero-tag { display: inline-block; font-size: clamp(0.68rem, 2.6vw, 0.8rem); font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--red-soft); padding: 8px 20px; border-radius: 999px; background: rgba(212, 175, 55, 0.16); border: 1px solid rgba(212, 175, 55, 0.5); margin-bottom: 22px; }
+    .hero-title { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(2.3rem, 10vw, 5.2rem); line-height: 1.08; color: var(--red-deep); letter-spacing: -0.01em; }
     .hero-title .gold { color: var(--gold); text-shadow: 0 0 34px rgba(212, 175, 55, 0.4); }
     .hero-sub { margin: 20px auto 0; max-width: 620px; font-size: clamp(0.98rem, 3.6vw, 1.18rem); color: rgba(58, 16, 23, 0.78); }
-    
-    .hero-date {
-      display: inline-flex; align-items: center; gap: 12px; margin-top: 34px;
-      padding: 12px 26px; border-radius: 999px; background: rgba(255, 248, 236, 0.85);
-      border: 1px solid rgba(212, 175, 55, 0.55); box-shadow: var(--shadow-soft);
-      font-weight: 700; color: var(--red-deep); letter-spacing: 0.08em;
-      font-size: clamp(0.85rem, 3.2vw, 1rem); backdrop-filter: blur(6px);
-    }
-
+    .hero-date { display: inline-flex; align-items: center; gap: 12px; margin-top: 34px; padding: 12px 26px; border-radius: 999px; background: rgba(255, 248, 236, 0.85); border: 1px solid rgba(212, 175, 55, 0.55); box-shadow: var(--shadow-soft); font-weight: 700; color: var(--red-deep); letter-spacing: 0.08em; font-size: clamp(0.85rem, 3.2vw, 1rem); backdrop-filter: blur(6px); }
     .hero-date .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); animation: heartPulse 2s ease-in-out infinite; }
-
-    .scroll-hint {
-      position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(122, 11, 30, 0.6); animation: hintFloat 2.6s ease-in-out infinite;
-    }
-
+    .scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(122, 11, 30, 0.6); animation: hintFloat 2.6s ease-in-out infinite; }
     .scroll-hint .mouse { width: 22px; height: 36px; border: 2px solid rgba(122, 11, 30, 0.45); border-radius: 12px; position: relative; }
-    .scroll-hint .mouse::after {
-      content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-      width: 4px; height: 8px; border-radius: 2px; background: var(--gold);
-      animation: wheelMove 1.8s ease-in-out infinite;
-    }
-
+    .scroll-hint .mouse::after { content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 4px; height: 8px; border-radius: 2px; background: var(--gold); animation: wheelMove 1.8s ease-in-out infinite; }
     @keyframes hintFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
     @keyframes wheelMove { 0% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, 10px); } }
 
@@ -415,27 +235,12 @@
        7. ĐỒNG HỒ ĐẾM NGƯỢC
        ============================================================ */
     .countdown-section { padding-top: clamp(20px, 5vw, 40px); }
-    .countdown-card {
-      background: linear-gradient(150deg, rgba(122, 11, 30, 0.97), rgba(86, 7, 22, 0.97));
-      border-radius: var(--radius-lg); padding: clamp(28px, 6vw, 52px);
-      box-shadow: var(--shadow-card); position: relative; overflow: hidden;
-      color: var(--cream); border: 1px solid rgba(212, 175, 55, 0.35);
-    }
-
-    .countdown-card::before {
-      content: ""; position: absolute; top: -40%; right: -20%; width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 65%); pointer-events: none;
-    }
-
+    .countdown-card { background: linear-gradient(150deg, rgba(122, 11, 30, 0.97), rgba(86, 7, 22, 0.97)); border-radius: var(--radius-lg); padding: clamp(28px, 6vw, 52px); box-shadow: var(--shadow-card); position: relative; overflow: hidden; color: var(--cream); border: 1px solid rgba(212, 175, 55, 0.35); }
+    .countdown-card::before { content: ""; position: absolute; top: -40%; right: -20%; width: 420px; height: 420px; background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 65%); pointer-events: none; }
     .countdown-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-light); text-align: center; margin-bottom: 10px; }
     .countdown-heading { font-family: "Playfair Display", serif; font-size: clamp(1.3rem, 4.5vw, 1.9rem); text-align: center; margin-bottom: 28px; color: var(--cream); }
     .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 2vw, 18px); position: relative; z-index: 1; }
-    
-    .countdown-cell {
-      background: rgba(255, 248, 236, 0.08); border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: var(--radius-md); padding: clamp(12px, 3vw, 22px) 4px; text-align: center; backdrop-filter: blur(4px);
-    }
-
+    .countdown-cell { background: rgba(255, 248, 236, 0.08); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: var(--radius-md); padding: clamp(12px, 3vw, 22px) 4px; text-align: center; backdrop-filter: blur(4px); }
     .countdown-num { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(1.5rem, 7vw, 2.7rem); line-height: 1; color: var(--gold-light); display: block; font-variant-numeric: tabular-nums; }
     .countdown-unit { display: block; margin-top: 8px; font-size: clamp(0.58rem, 2.2vw, 0.72rem); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 248, 236, 0.7); }
     .countdown-note { margin-top: 22px; text-align: center; font-size: clamp(0.78rem, 2.8vw, 0.9rem); color: rgba(255, 248, 236, 0.65); }
@@ -443,22 +248,9 @@
     /* ============================================================
        8. LỜI CHÚC (Typewriter)
        ============================================================ */
-    .wish-panel {
-      margin-top: 34px; background: rgba(255, 248, 236, 0.82); border: 1px solid rgba(212, 175, 55, 0.45);
-      border-radius: var(--radius-lg); padding: clamp(26px, 6vw, 52px); box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(6px); position: relative;
-    }
-
-    .wish-panel::before {
-      content: "❝"; position: absolute; top: 6px; left: 22px; font-family: "Playfair Display", serif;
-      font-size: 4rem; line-height: 1; color: rgba(212, 175, 55, 0.35); pointer-events: none;
-    }
-
-    .typewriter {
-      font-family: "Playfair Display", serif; font-style: italic; font-size: clamp(1.05rem, 3.8vw, 1.45rem);
-      line-height: 1.8; color: var(--red-deep); min-height: 6.4em; white-space: pre-wrap; word-break: break-word;
-    }
-
+    .wish-panel { margin-top: 34px; background: rgba(255, 248, 236, 0.82); border: 1px solid rgba(212, 175, 55, 0.45); border-radius: var(--radius-lg); padding: clamp(26px, 6vw, 52px); box-shadow: var(--shadow-soft); backdrop-filter: blur(6px); position: relative; }
+    .wish-panel::before { content: "❝"; position: absolute; top: 6px; left: 22px; font-family: "Playfair Display", serif; font-size: 4rem; line-height: 1; color: rgba(212, 175, 55, 0.35); pointer-events: none; }
+    .typewriter { font-family: "Playfair Display", serif; font-style: italic; font-size: clamp(1.05rem, 3.8vw, 1.45rem); line-height: 1.8; color: var(--red-deep); min-height: 6.4em; white-space: pre-wrap; word-break: break-word; }
     .typewriter .caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.12em; background: var(--gold); animation: caretBlink 0.9s steps(1) infinite; }
     @keyframes caretBlink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
     .wish-sign { margin-top: 22px; text-align: right; font-weight: 700; color: var(--red-soft); letter-spacing: 0.05em; }
@@ -467,19 +259,10 @@
        9. TIMELINE KỶ NIỆM
        ============================================================ */
     .timeline { position: relative; margin-top: 48px; padding-left: 26px; }
-    .timeline::before {
-      content: ""; position: absolute; top: 6px; bottom: 6px; left: 7px; width: 2px;
-      background: linear-gradient(180deg, transparent, var(--gold) 12%, var(--gold) 88%, transparent); opacity: 0.7;
-    }
-
+    .timeline::before { content: ""; position: absolute; top: 6px; bottom: 6px; left: 7px; width: 2px; background: linear-gradient(180deg, transparent, var(--gold) 12%, var(--gold) 88%, transparent); opacity: 0.7; }
     .timeline-item { position: relative; padding: 0 0 34px 30px; }
     .timeline-item:last-child { padding-bottom: 0; }
-    
-    .timeline-dot {
-      position: absolute; left: -26px; top: 6px; width: 16px; height: 16px; border-radius: 50%;
-      background: var(--cream); border: 3px solid var(--gold); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), 0 0 16px rgba(212, 175, 55, 0.5);
-    }
-
+    .timeline-dot { position: absolute; left: -26px; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); border: 3px solid var(--gold); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), 0 0 16px rgba(212, 175, 55, 0.5); }
     .timeline-year { display: inline-block; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.18em; color: var(--red-soft); background: rgba(212, 175, 55, 0.18); border-radius: 999px; padding: 4px 14px; margin-bottom: 10px; }
     .timeline-title { font-family: "Playfair Display", serif; font-size: clamp(1.05rem, 3.6vw, 1.3rem); color: var(--red-deep); margin-bottom: 6px; }
     .timeline-text { color: rgba(58, 16, 23, 0.72); font-size: clamp(0.9rem, 3vw, 1rem); max-width: 640px; }
@@ -488,13 +271,7 @@
        10. GALLERY ẢNH
        ============================================================ */
     .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: clamp(14px, 3vw, 22px); margin-top: 44px; }
-    
-    .gallery-item {
-      position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4 / 3;
-      box-shadow: var(--shadow-soft); border: 1px solid rgba(212, 175, 55, 0.45);
-      background: linear-gradient(135deg, #f7e6cd, #f3d9c0); cursor: pointer; transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
-    }
-
+    .gallery-item { position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--shadow-soft); border: 1px solid rgba(212, 175, 55, 0.45); background: linear-gradient(135deg, #f7e6cd, #f3d9c0); cursor: pointer; transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
     .gallery-item:hover, .gallery-item:focus-visible { transform: translateY(-6px) scale(1.015); box-shadow: var(--shadow-card); outline: none; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
     .gallery-item:hover img { transform: scale(1.06); }
@@ -504,40 +281,28 @@
        11. LỜI TRI ÂN
        ============================================================ */
     .thanks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: clamp(16px, 3vw, 24px); margin-top: 44px; }
-    
-    .thanks-card {
-      background: rgba(255, 248, 236, 0.9); border: 1px solid rgba(212, 175, 55, 0.45);
-      border-radius: var(--radius-md); padding: clamp(22px, 5vw, 30px); box-shadow: var(--shadow-soft);
-      position: relative; transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
-    }
-
+    .thanks-card { background: rgba(255, 248, 236, 0.9); border: 1px solid rgba(212, 175, 55, 0.45); border-radius: var(--radius-md); padding: clamp(22px, 5vw, 30px); box-shadow: var(--shadow-soft); position: relative; transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease); }
     .thanks-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
     .thanks-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--red-dark); font-size: 1.2rem; margin-bottom: 16px; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35); }
     .thanks-card h3 { font-family: "Playfair Display", serif; font-size: 1.18rem; color: var(--red-deep); margin-bottom: 8px; }
     .thanks-card p { font-size: 0.95rem; color: rgba(58, 16, 23, 0.72); }
 
     /* ============================================================
-       12. THIỆP ĐIỆN TỬ (ĐÃ FIX LỖI LẬT TRÊN IOS)
+       12. THIỆP ĐIỆN TỬ (ĐÃ FIX LỖI LẬT)
        ============================================================ */
     .card-stage { margin-top: 48px; display: flex; justify-content: center; perspective: 1400px; }
-
-    .ecard {
-      width: min(520px, 100%); aspect-ratio: 3 / 4; max-height: 640px;
-      position: relative; cursor: pointer; border-radius: var(--radius-lg);
-    }
-
+    .ecard { width: min(520px, 100%); aspect-ratio: 3 / 4; max-height: 640px; position: relative; cursor: pointer; border-radius: var(--radius-lg); }
+    
     .ecard-face {
       position: absolute; inset: 0; border-radius: var(--radius-lg);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: clamp(24px, 6vw, 44px); box-shadow: var(--shadow-card);
       border: 1px solid rgba(212, 175, 55, 0.5); overflow: hidden;
-      /* Chuyển động mượt mà */
       transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
 
-    /* Mặt trước */
     .ecard-front {
       background: radial-gradient(circle at 50% 22%, rgba(212, 175, 55, 0.25), transparent 55%), linear-gradient(155deg, #8c1029, #6b0818 60%, #560716);
       color: var(--cream);
@@ -546,18 +311,16 @@
       z-index: 2;
     }
 
-    /* Mặt sau */
     .ecard-back {
       background: linear-gradient(160deg, #fffdf8, #fdf1dd);
       color: var(--ink);
       opacity: 0;
-      transform: rotateY(180deg); /* Lật ngược lại */
+      transform: rotateY(180deg);
       z-index: 1;
       justify-content: flex-start;
       overflow-y: auto;
     }
 
-    /* Trạng thái MỞ */
     .ecard.open .ecard-front { opacity: 0; transform: rotateY(-180deg); z-index: 1; pointer-events: none; }
     .ecard.open .ecard-back { opacity: 1; transform: rotateY(0deg); z-index: 2; pointer-events: auto; }
 
@@ -592,7 +355,7 @@
     .form-msg { margin-top: 14px; font-size: 0.85rem; font-weight: 600; color: var(--red-soft); min-height: 1.2em; }
 
     /* ============================================================
-       14. CÁC THÀNH PHẦN NỔI (TOAST, NHẠC, PHÁO HOA)
+       14. CÁC THÀNH PHẦN NỔI
        ============================================================ */
     #toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 1000; background: rgba(86, 7, 22, 0.95); color: var(--cream); font-weight: 600; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; border: 1px solid rgba(212, 175, 55, 0.5); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28); opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); max-width: calc(100vw - 36px); text-align: center; }
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
@@ -690,9 +453,6 @@
     <button class="skip-credits" id="skipCredits">Bỏ qua ⏭</button>
   </div>
 
-  <!-- ============================================================
-       CANVAS TRÁI TIM
-       ============================================================ -->
   <canvas id="heartsCanvas" aria-hidden="true"></canvas>
 
   <!-- ============================================================
@@ -718,7 +478,6 @@
        NỘI DUNG CHÍNH
        ============================================================ -->
   <main>
-    <!-- HERO -->
     <section class="hero" id="hero">
       <div class="container">
         <div class="hero-ornament reveal" data-delay="1" aria-hidden="true">✦ ✦ ✦</div>
@@ -741,45 +500,27 @@
       </div>
     </section>
 
-    <!-- ĐỒNG HỒ ĐẾM NGƯỢC -->
     <section class="section countdown-section" id="countdown">
       <div class="container">
         <div class="countdown-card reveal">
           <p class="countdown-label">Đếm ngược đến ngày tri ân</p>
           <h2 class="countdown-heading">20 / 11 – Ngày Nhà giáo Việt Nam</h2>
           <div class="countdown-grid" role="timer" aria-live="polite">
-            <div class="countdown-cell">
-              <span class="countdown-num" id="cdDays">--</span>
-              <span class="countdown-unit">Ngày</span>
-            </div>
-            <div class="countdown-cell">
-              <span class="countdown-num" id="cdHours">--</span>
-              <span class="countdown-unit">Giờ</span>
-            </div>
-            <div class="countdown-cell">
-              <span class="countdown-num" id="cdMinutes">--</span>
-              <span class="countdown-unit">Phút</span>
-            </div>
-            <div class="countdown-cell">
-              <span class="countdown-num" id="cdSeconds">--</span>
-              <span class="countdown-unit">Giây</span>
-            </div>
+            <div class="countdown-cell"><span class="countdown-num" id="cdDays">--</span><span class="countdown-unit">Ngày</span></div>
+            <div class="countdown-cell"><span class="countdown-num" id="cdHours">--</span><span class="countdown-unit">Giờ</span></div>
+            <div class="countdown-cell"><span class="countdown-num" id="cdMinutes">--</span><span class="countdown-unit">Phút</span></div>
+            <div class="countdown-cell"><span class="countdown-num" id="cdSeconds">--</span><span class="countdown-unit">Giây</span></div>
           </div>
-          <p class="countdown-note" id="countdownNote">
-            Mỗi khoảnh khắc trôi qua, lòng tri ân càng thêm đong đầy.
-          </p>
+          <p class="countdown-note" id="countdownNote">Mỗi khoảnh khắc trôi qua, lòng tri ân càng thêm đong đầy.</p>
         </div>
       </div>
     </section>
 
-    <!-- LỜI CHÚC TYPEWRITER -->
     <section class="section" id="wish">
       <div class="container">
         <div class="center">
           <span class="section-eyebrow reveal">Lời chúc từ trái tim</span>
-          <h2 class="section-title reveal" data-delay="1">
-            Gửi đến <span class="gold">người thầy</span> kính yêu
-          </h2>
+          <h2 class="section-title reveal" data-delay="1">Gửi đến <span class="gold">người thầy</span> kính yêu</h2>
         </div>
         <div class="wish-panel reveal" data-delay="2">
           <p class="typewriter" id="typewriter" aria-live="polite"></p>
@@ -788,69 +529,46 @@
       </div>
     </section>
 
-    <!-- TIMELINE -->
     <section class="section" id="timeline">
       <div class="container">
         <span class="section-eyebrow reveal">Dấu chân kỷ niệm</span>
-        <h2 class="section-title reveal" data-delay="1">
-          Hành trình <span class="gold">tri ân</span>
-        </h2>
-        <p class="section-desc reveal" data-delay="2">
-          Những mốc thời gian đẹp đẽ được ghi lại bằng sự biết ơn và tình cảm chân thành.
-        </p>
+        <h2 class="section-title reveal" data-delay="1">Hành trình <span class="gold">tri ân</span></h2>
+        <p class="section-desc reveal" data-delay="2">Những mốc thời gian đẹp đẽ được ghi lại bằng sự biết ơn và tình cảm chân thành.</p>
         <div class="timeline">
           <div class="timeline-item reveal" data-delay="2">
             <span class="timeline-dot" aria-hidden="true"></span>
             <span class="timeline-year">Ngày đầu tiên</span>
             <h3 class="timeline-title">Bỡ ngỡ bước vào lớp học</h3>
-            <p class="timeline-text">
-              Thầy cô đã đón chúng em bằng nụ cười ấm áp, mở ra một thế giới tri thức mới
-              và gieo những hạt giống đầu tiên của ước mơ.
-            </p>
+            <p class="timeline-text">Thầy cô đã đón chúng em bằng nụ cười ấm áp, mở ra một thế giới tri thức mới và gieo những hạt giống đầu tiên của ước mơ.</p>
           </div>
           <div class="timeline-item reveal" data-delay="3">
             <span class="timeline-dot" aria-hidden="true"></span>
             <span class="timeline-year">Mỗi ngày đến lớp</span>
             <h3 class="timeline-title">Bài giảng và những bài học làm người</h3>
-            <p class="timeline-text">
-              Không chỉ là con chữ, thầy cô còn dạy chúng em cách đứng dậy sau vấp ngã,
-              cách yêu thương và sống có trách nhiệm.
-            </p>
+            <p class="timeline-text">Không chỉ là con chữ, thầy cô còn dạy chúng em cách đứng dậy sau vấp ngã, cách yêu thương và sống có trách nhiệm.</p>
           </div>
           <div class="timeline-item reveal" data-delay="4">
             <span class="timeline-dot" aria-hidden="true"></span>
             <span class="timeline-year">Ngày 20/11</span>
             <h3 class="timeline-title">Lời tri ân dâng tặng</h3>
-            <p class="timeline-text">
-              Hôm nay, chúng em muốn nói rằng: cảm ơn thầy cô vì đã luôn ở đó,
-              kiên nhẫn và bao dung, trao đi mà không hề toan tính.
-            </p>
+            <p class="timeline-text">Hôm nay, chúng em muốn nói rằng: cảm ơn thầy cô vì đã luôn ở đó, kiên nhẫn và bao dung, trao đi mà không hề toan tính.</p>
           </div>
           <div class="timeline-item reveal" data-delay="5">
             <span class="timeline-dot" aria-hidden="true"></span>
             <span class="timeline-year">Mãi về sau</span>
             <h3 class="timeline-title">Lòng biết ơn không phai</h3>
-            <p class="timeline-text">
-              Dù năm tháng có trôi qua, những lời dạy hôm nay vẫn là hành trang
-              theo chúng em trên mọi nẻo đường.
-            </p>
+            <p class="timeline-text">Dù năm tháng có trôi qua, những lời dạy hôm nay vẫn là hành trang theo chúng em trên mọi nẻo đường.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- GALLERY -->
     <section class="section" id="gallery">
       <div class="container">
         <div class="center">
           <span class="section-eyebrow reveal">Khoảnh khắc đáng nhớ</span>
-          <h2 class="section-title reveal" data-delay="1">
-            Những <span class="gold">khung hình</span> thân thương
-          </h2>
-          <p class="section-desc reveal" data-delay="2">
-            Mỗi bức ảnh là một câu chuyện nhỏ về tình thầy trò – nơi ký ức được giữ lại
-            bằng yêu thương.
-          </p>
+          <h2 class="section-title reveal" data-delay="1">Những <span class="gold">khung hình</span> thân thương</h2>
+          <p class="section-desc reveal" data-delay="2">Mỗi bức ảnh là một câu chuyện nhỏ về tình thầy trò – nơi ký ức được giữ lại bằng yêu thương.</p>
         </div>
         <div class="gallery">
           <figure class="gallery-item reveal" data-delay="2" tabindex="0" role="img" aria-label="Kỷ niệm lớp học">
@@ -884,17 +602,12 @@
       </div>
     </section>
 
-    <!-- LỜI TRI ÂN -->
     <section class="section" id="thanks">
       <div class="container">
         <div class="center">
           <span class="section-eyebrow reveal">Trái tim gửi trao</span>
-          <h2 class="section-title reveal" data-delay="1">
-            Lời <span class="gold">tri ân</span> chân thành
-          </h2>
-          <p class="section-desc reveal" data-delay="2">
-            Ba điều chúng em luôn muốn nói với thầy cô, hôm nay và mãi về sau.
-          </p>
+          <h2 class="section-title reveal" data-delay="1">Lời <span class="gold">tri ân</span> chân thành</h2>
+          <p class="section-desc reveal" data-delay="2">Ba điều chúng em luôn muốn nói với thầy cô, hôm nay và mãi về sau.</p>
         </div>
         <div class="thanks-grid">
           <article class="thanks-card reveal" data-delay="2">
@@ -916,17 +629,12 @@
       </div>
     </section>
 
-    <!-- THIỆP ĐIỆN TỬ -->
     <section class="section" id="ecard">
       <div class="container">
         <div class="center">
           <span class="section-eyebrow reveal">Thiệp điện tử</span>
-          <h2 class="section-title reveal" data-delay="1">
-            Mở <span class="gold">tấm thiệp</span> tri ân
-          </h2>
-          <p class="section-desc reveal" data-delay="2">
-            Nhấn vào tấm thiệp để mở ra lời chúc đặc biệt bên trong.
-          </p>
+          <h2 class="section-title reveal" data-delay="1">Mở <span class="gold">tấm thiệp</span> tri ân</h2>
+          <p class="section-desc reveal" data-delay="2">Nhấn vào tấm thiệp để mở ra lời chúc đặc biệt bên trong.</p>
         </div>
         <div class="card-stage reveal" data-delay="3">
           <div class="ecard" id="ecard" role="button" tabindex="0" aria-label="Nhấn để mở thiệp chúc mừng 20/11">
@@ -939,11 +647,7 @@
             <div class="ecard-face ecard-back">
               <span class="back-eyebrow">20 · 11</span>
               <h3>Lời tri ân từ trái tim</h3>
-              <p>
-                Cảm ơn thầy cô đã dành cả thanh xuân để dìu dắt bao thế hệ học trò.
-                Mỗi bài giảng là một ngọn đèn, mỗi lời dạy là một hành trang.
-                Chúng em sẽ luôn ghi nhớ và biết ơn.
-              </p>
+              <p>Cảm ơn thầy cô đã dành cả thanh xuân để dìu dắt bao thế hệ học trò. Mỗi bài giảng là một ngọn đèn, mỗi lời dạy là một hành trang. Chúng em sẽ luôn ghi nhớ và biết ơn.</p>
               <p class="back-sign">— Học trò của thầy cô</p>
               <button class="ecard-close" id="ecardClose" type="button">Đóng thiệp</button>
             </div>
@@ -952,17 +656,12 @@
       </div>
     </section>
 
-    <!-- FORM GỬI LỜI CHÚC -->
     <section class="section" id="send-wish">
       <div class="container">
         <div class="center">
           <span class="section-eyebrow reveal">Gửi gắm yêu thương</span>
-          <h2 class="section-title reveal" data-delay="1">
-            Viết <span class="gold">lời chúc</span> của bạn
-          </h2>
-          <p class="section-desc reveal" data-delay="2">
-            Hãy để lại tên và lời chúc, rồi nhấn nút gửi để thắp lên pháo hoa tri ân.
-          </p>
+          <h2 class="section-title reveal" data-delay="1">Viết <span class="gold">lời chúc</span> của bạn</h2>
+          <p class="section-desc reveal" data-delay="2">Hãy để lại tên và lời chúc, rồi nhấn nút gửi để thắp lên pháo hoa tri ân.</p>
         </div>
         <div class="wish-form-wrap reveal" data-delay="3">
           <form id="wishForm" novalidate>
@@ -985,28 +684,19 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <h2 class="footer-title">Tri ân thầy cô – 20/11</h2>
-      <p class="footer-text">
-        Cảm ơn thầy cô vì đã là người dẫn đường, người truyền cảm hứng và là điểm tựa tinh thần cho bao thế hệ học trò.
-      </p>
-      <span class="footer-signature">
-        Made with <span class="heart" aria-hidden="true">❤</span> love – HQL_2311
-      </span>
+      <p class="footer-text">Cảm ơn thầy cô vì đã là người dẫn đường, người truyền cảm hứng và là điểm tựa tinh thần cho bao thế hệ học trò.</p>
+      <span class="footer-signature">Made with <span class="heart" aria-hidden="true">❤</span> love – HQL_2311</span>
     </div>
   </footer>
 
-  <!-- NÚT NHẠC NỀN -->
   <button class="music-toggle" id="musicToggle" type="button" aria-label="Bật nhạc nền" title="Bật/tắt nhạc nền">
     <span class="icon" aria-hidden="true">🎵</span>
   </button>
 
-  <!-- CANVAS PHÁO HOA -->
   <canvas id="fireworksCanvas" aria-hidden="true"></canvas>
-
-  <!-- TOAST -->
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -1027,13 +717,13 @@
     let creditsTimeout = null;
 
     function showEndCredits() {
-      // Hiện màn hình đen
       endCredits.classList.add("active");
-      document.body.style.overflow = "hidden"; // Khoá cuộn trang chính
+      document.body.style.overflow = "hidden";
 
-      // Nếu không giảm chuyển động, đợi 35s (thời gian animation) rồi tự đóng
-      // Nếu giảm chuyển động, đợi 5s
-      const delay = prefersReducedMotion ? 5000 : 35000;
+      // Thời gian animation CSS là 28s. 
+      // Cộng thêm 1.5s để đảm bảo chữ cuối cùng đã trôi qua hẳn màn hình.
+      // Nếu giảm chuyển động, chỉ đợi 3s để người dùng đọc kịp.
+      const delay = prefersReducedMotion ? 3000 : 29500;
       
       creditsTimeout = setTimeout(() => {
         closeEndCredits();
@@ -1042,10 +732,9 @@
 
     function closeEndCredits() {
       endCredits.classList.remove("active");
-      document.body.style.overflow = ""; // Mở khoá cuộn
+      document.body.style.overflow = "";
       if (creditsTimeout) clearTimeout(creditsTimeout);
       
-      // Bắt đầu typewriter và auto scroll sau khi credits đóng
       startTypewriter();
       if (typeof heartsController !== "undefined") {
         heartsController.boost();
@@ -1056,11 +745,7 @@
     function closeIntro() {
       if (introClosed) return;
       introClosed = true;
-      
-      // Ẩn màn hình chào
       introOverlay.classList.add("hidden");
-      
-      // Hiện màn hình End Credits
       showEndCredits();
     }
 
@@ -1074,7 +759,6 @@
       }
     });
 
-    // Nút bỏ qua credits
     skipCredits.addEventListener("click", closeEndCredits);
 
     /* ============================================================
@@ -1135,7 +819,7 @@
     window.addEventListener("mousedown", interruptAutoScroll, { passive: true });
 
     /* ============================================================
-       3. SCROLL REVEAL (IntersectionObserver)
+       3. SCROLL REVEAL
        ============================================================ */
     (function initScrollReveal() {
       const elements = $$(".reveal");
@@ -1247,7 +931,7 @@
     });
 
     /* ============================================================
-       6. THIỆP ĐIỆN TỬ (ĐÃ FIX LỖI)
+       6. THIỆP ĐIỆN TỬ (FIX LỖI)
        ============================================================ */
     (function initEcard() {
       const ecard = $("#ecard");
