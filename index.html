@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#7a0b1e" />
+  <meta name="description" content="Tri ân thầy cô nhân ngày Nhà giáo Việt Nam 20/11 – Lời chúc, kỷ niệm và thiệp điện tử." />
+  <title>TRI ÂN THẦY CÔ 20/11</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ============================================================
+       1. BIẾN TOÀN CỤC & RESET
+       ============================================================ */
+    :root {
+      --red-deep: #7a0b1e;
+      --red-dark: #560716;
+      --red-soft: #a3243b;
+      --gold: #d4af37;
+      --gold-light: #f0d98c;
+      --gold-glow: rgba(212, 175, 55, 0.55);
+      --cream: #fff8ec;
+      --cream-soft: #fdf1dd;
+      --ink: #3a1017;
+      --shadow-soft: 0 10px 30px rgba(86, 7, 22, 0.18);
+      --shadow-card: 0 18px 40px rgba(86, 7, 22, 0.22);
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: "Quicksand", "Segoe UI", system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(163, 36, 59, 0.16), transparent 45%),
+        radial-gradient(circle at 88% 92%, rgba(212, 175, 55, 0.16), transparent 50%),
+        linear-gradient(160deg, #fffaf1 0%, #fdeed9 45%, #fbe3d4 100%);
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       2. CANVAS TRÁI TIM
+       ============================================================ */
+    #heartsCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    /* ============================================================
+       3. MÀN HÌNH END CREDITS (TỰ ĐỘNG LƯỚT LÊN)
+       ============================================================ */
+    #endCredits {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #0a0204; /* Nền tối điện ảnh */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.5s ease, visibility 1.5s ease;
+    }
+
+    #endCredits.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .credits-content {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+      color: var(--cream);
+      padding: 0 20px;
+      /* Animation lướt từ dưới lên: 35 giây */
+      animation: scrollCredits 35s linear forwards;
+    }
+
+    @keyframes scrollCredits {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-1800px); } /* Lướt qua khỏi màn hình */
+    }
+
+    /* Nội dung Credits */
+    .credits-logo {
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .credits-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+    }
+
+    .credits-subtitle {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 248, 236, 0.5);
+      margin-bottom: 50px;
+    }
+
+    .credits-section {
+      margin-bottom: 45px;
+    }
+
+    .credits-role {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .credits-name {
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .credits-desc {
+      font-size: 0.9rem;
+      color: rgba(255, 248, 236, 0.7);
+    }
+
+    .credits-heart {
+      color: #ff6b8a;
+      font-size: 1.5rem;
+      margin: 30px 0;
+      animation: heartPulse 2s infinite;
+    }
+
+    .credits-footer {
+      font-size: 0.8rem;
+      color: rgba(255, 248, 236, 0.4);
+      margin-top: 60px;
+    }
+
+    /* Nút bỏ qua */
+    .skip-credits {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1001;
+      color: rgba(255, 248, 236, 0.5);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      transition: all 0.3s;
+    }
+    
+    .skip-credits:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* ============================================================
+       4. OVERLAY MỞ ĐẦU
+       ============================================================ */
+    #introOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.18), transparent 60%),
+        linear-gradient(160deg, #6b0818 0%, #8c1029 55%, #560716 100%);
+      color: var(--cream);
+      transition: opacity 1s var(--ease), visibility 1s var(--ease);
+    }
+
+    #introOverlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-inner { max-width: 720px; position: relative; }
+
+    .intro-ribbon {
+      display: inline-block;
+      font-size: clamp(0.7rem, 2.6vw, 0.85rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border: 1px solid rgba(212, 175, 55, 0.55);
+      border-radius: 999px;
+      padding: 8px 18px;
+      margin-bottom: 26px;
+      background: rgba(212, 175, 55, 0.08);
+      backdrop-filter: blur(4px);
+      animation: introRise 1.1s var(--ease) both;
+    }
+
+    .intro-title {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: clamp(2.1rem, 9vw, 4.4rem);
+      line-height: 1.12;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+      animation: introRise 1.2s 0.15s var(--ease) both;
+    }
+
+    .intro-title .gold { color: var(--gold); text-shadow: 0 0 28px var(--gold-glow); }
+
+    .intro-sub {
+      margin-top: 18px;
+      font-size: clamp(0.95rem, 3.4vw, 1.15rem);
+      color: rgba(255, 248, 236, 0.85);
+      animation: introRise 1.2s 0.35s var(--ease) both;
+    }
+
+    .intro-btn {
+      margin-top: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 34px;
+      font-weight: 700;
+      font-size: clamp(0.95rem, 3.4vw, 1.05rem);
+      color: var(--red-dark);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+      animation: introRise 1.2s 0.55s var(--ease) both;
+    }
+
+    .intro-btn:hover, .intro-btn:focus-visible {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 18px 40px rgba(212, 175, 55, 0.55);
+      outline: none;
+    }
+
+    .intro-heart { font-size: 1.15em; animation: heartPulse 1.8s ease-in-out infinite; }
+
+    @keyframes introRise {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    /* ============================================================
+       5. TIỆN ÍCH CHUNG
+       ============================================================ */
+    main { position: relative; z-index: 1; }
+
+    .section { padding: clamp(56px, 9vw, 110px) clamp(18px, 5vw, 48px); position: relative; }
+    .container { width: min(1120px, 100%); margin: 0 auto; }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red-soft);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: clamp(1.7rem, 5.5vw, 2.9rem);
+      line-height: 1.2;
+      color: var(--red-deep);
+    }
+
+    .section-title .gold { color: var(--gold); text-shadow: 0 0 24px rgba(212, 175, 55, 0.35); }
+    .section-desc { margin-top: 14px; max-width: 620px; color: rgba(58, 16, 23, 0.72); font-size: clamp(0.95rem, 3vw, 1.05rem); }
+    .center { text-align: center; }
+    .center .section-desc { margin-left: auto; margin-right: auto; }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(52px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal[data-delay="1"] { transition-delay: 0.1s; }
+    .reveal[data-delay="2"] { transition-delay: 0.2s; }
+    .reveal[data-delay="3"] { transition-delay: 0.3s; }
+    .reveal[data-delay="4"] { transition-delay: 0.4s; }
+    .reveal[data-delay="5"] { transition-delay: 0.5s; }
+
+    /* ============================================================
+       6. HERO SECTION
+       ============================================================ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(90px, 14vh, 150px) clamp(18px, 5vw, 48px) clamp(70px, 10vh, 110px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 8%; left: 50%; transform: translateX(-50%);
+      width: min(680px, 92vw); aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.06) 45%, transparent 70%);
+      filter: blur(10px);
+      pointer-events: none; z-index: -1;
+    }
+
+    .hero-ornament { font-size: clamp(1.4rem, 4vw, 1.9rem); color: var(--gold); letter-spacing: 0.5em; margin-bottom: 18px; opacity: 0.85; }
+    .hero-tag {
+      display: inline-block; font-size: clamp(0.68rem, 2.6vw, 0.8rem); font-weight: 700;
+      letter-spacing: 0.34em; text-transform: uppercase; color: var(--red-soft);
+      padding: 8px 20px; border-radius: 999px; background: rgba(212, 175, 55, 0.16);
+      border: 1px solid rgba(212, 175, 55, 0.5); margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif; font-weight: 700;
+      font-size: clamp(2.3rem, 10vw, 5.2rem); line-height: 1.08;
+      color: var(--red-deep); letter-spacing: -0.01em;
+    }
+
+    .hero-title .gold { color: var(--gold); text-shadow: 0 0 34px rgba(212, 175, 55, 0.4); }
+    .hero-sub { margin: 20px auto 0; max-width: 620px; font-size: clamp(0.98rem, 3.6vw, 1.18rem); color: rgba(58, 16, 23, 0.78); }
+    
+    .hero-date {
+      display: inline-flex; align-items: center; gap: 12px; margin-top: 34px;
+      padding: 12px 26px; border-radius: 999px; background: rgba(255, 248, 236, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.55); box-shadow: var(--shadow-soft);
+      font-weight: 700; color: var(--red-deep); letter-spacing: 0.08em;
+      font-size: clamp(0.85rem, 3.2vw, 1rem); backdrop-filter: blur(6px);
+    }
+
+    .hero-date .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); animation: heartPulse 2s ease-in-out infinite; }
+
+    .scroll-hint {
+      position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(122, 11, 30, 0.6); animation: hintFloat 2.6s ease-in-out infinite;
+    }
+
+    .scroll-hint .mouse { width: 22px; height: 36px; border: 2px solid rgba(122, 11, 30, 0.45); border-radius: 12px; position: relative; }
+    .scroll-hint .mouse::after {
+      content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 8px; border-radius: 2px; background: var(--gold);
+      animation: wheelMove 1.8s ease-in-out infinite;
+    }
+
+    @keyframes hintFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+    @keyframes wheelMove { 0% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, 10px); } }
+
+    /* ============================================================
+       7. ĐỒNG HỒ ĐẾM NGƯỢC
+       ============================================================ */
+    .countdown-section { padding-top: clamp(20px, 5vw, 40px); }
+    .countdown-card {
+      background: linear-gradient(150deg, rgba(122, 11, 30, 0.97), rgba(86, 7, 22, 0.97));
+      border-radius: var(--radius-lg); padding: clamp(28px, 6vw, 52px);
+      box-shadow: var(--shadow-card); position: relative; overflow: hidden;
+      color: var(--cream); border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+
+    .countdown-card::before {
+      content: ""; position: absolute; top: -40%; right: -20%; width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 65%); pointer-events: none;
+    }
+
+    .countdown-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-light); text-align: center; margin-bottom: 10px; }
+    .countdown-heading { font-family: "Playfair Display", serif; font-size: clamp(1.3rem, 4.5vw, 1.9rem); text-align: center; margin-bottom: 28px; color: var(--cream); }
+    .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 2vw, 18px); position: relative; z-index: 1; }
+    
+    .countdown-cell {
+      background: rgba(255, 248, 236, 0.08); border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--radius-md); padding: clamp(12px, 3vw, 22px) 4px; text-align: center; backdrop-filter: blur(4px);
+    }
+
+    .countdown-num { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(1.5rem, 7vw, 2.7rem); line-height: 1; color: var(--gold-light); display: block; font-variant-numeric: tabular-nums; }
+    .countdown-unit { display: block; margin-top: 8px; font-size: clamp(0.58rem, 2.2vw, 0.72rem); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 248, 236, 0.7); }
+    .countdown-note { margin-top: 22px; text-align: center; font-size: clamp(0.78rem, 2.8vw, 0.9rem); color: rgba(255, 248, 236, 0.65); }
+
+    /* ============================================================
+       8. LỜI CHÚC (Typewriter)
+       ============================================================ */
+    .wish-panel {
+      margin-top: 34px; background: rgba(255, 248, 236, 0.82); border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: var(--radius-lg); padding: clamp(26px, 6vw, 52px); box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(6px); position: relative;
+    }
+
+    .wish-panel::before {
+      content: "❝"; position: absolute; top: 6px; left: 22px; font-family: "Playfair Display", serif;
+      font-size: 4rem; line-height: 1; color: rgba(212, 175, 55, 0.35); pointer-events: none;
+    }
+
+    .typewriter {
+      font-family: "Playfair Display", serif; font-style: italic; font-size: clamp(1.05rem, 3.8vw, 1.45rem);
+      line-height: 1.8; color: var(--red-deep); min-height: 6.4em; white-space: pre-wrap; word-break: break-word;
+    }
+
+    .typewriter .caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.12em; background: var(--gold); animation: caretBlink 0.9s steps(1) infinite; }
+    @keyframes caretBlink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+    .wish-sign { margin-top: 22px; text-align: right; font-weight: 700; color: var(--red-soft); letter-spacing: 0.05em; }
+
+    /* ============================================================
+       9. TIMELINE KỶ NIỆM
+       ============================================================ */
+    .timeline { position: relative; margin-top: 48px; padding-left: 26px; }
+    .timeline::before {
+      content: ""; position: absolute; top: 6px; bottom: 6px; left: 7px; width: 2px;
+      background: linear-gradient(180deg, transparent, var(--gold) 12%, var(--gold) 88%, transparent); opacity: 0.7;
+    }
+
+    .timeline-item { position: relative; padding: 0 0 34px 30px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    
+    .timeline-dot {
+      position: absolute; left: -26px; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--cream); border: 3px solid var(--gold); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), 0 0 16px rgba(212, 175, 55, 0.5);
+    }
+
+    .timeline-year { display: inline-block; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.18em; color: var(--red-soft); background: rgba(212, 175, 55, 0.18); border-radius: 999px; padding: 4px 14px; margin-bottom: 10px; }
+    .timeline-title { font-family: "Playfair Display", serif; font-size: clamp(1.05rem, 3.6vw, 1.3rem); color: var(--red-deep); margin-bottom: 6px; }
+    .timeline-text { color: rgba(58, 16, 23, 0.72); font-size: clamp(0.9rem, 3vw, 1rem); max-width: 640px; }
+
+    /* ============================================================
+       10. GALLERY ẢNH
+       ============================================================ */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: clamp(14px, 3vw, 22px); margin-top: 44px; }
+    
+    .gallery-item {
+      position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4 / 3;
+      box-shadow: var(--shadow-soft); border: 1px solid rgba(212, 175, 55, 0.45);
+      background: linear-gradient(135deg, #f7e6cd, #f3d9c0); cursor: pointer; transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    }
+
+    .gallery-item:hover, .gallery-item:focus-visible { transform: translateY(-6px) scale(1.015); box-shadow: var(--shadow-card); outline: none; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-caption { position: absolute; inset: auto 0 0 0; padding: 26px 16px 14px; background: linear-gradient(180deg, transparent, rgba(86, 7, 22, 0.82)); color: var(--cream); font-weight: 600; font-size: 0.9rem; }
+
+    /* ============================================================
+       11. LỜI TRI ÂN
+       ============================================================ */
+    .thanks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: clamp(16px, 3vw, 24px); margin-top: 44px; }
+    
+    .thanks-card {
+      background: rgba(255, 248, 236, 0.9); border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: var(--radius-md); padding: clamp(22px, 5vw, 30px); box-shadow: var(--shadow-soft);
+      position: relative; transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+    }
+
+    .thanks-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+    .thanks-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--red-dark); font-size: 1.2rem; margin-bottom: 16px; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35); }
+    .thanks-card h3 { font-family: "Playfair Display", serif; font-size: 1.18rem; color: var(--red-deep); margin-bottom: 8px; }
+    .thanks-card p { font-size: 0.95rem; color: rgba(58, 16, 23, 0.72); }
+
+    /* ============================================================
+       12. THIỆP ĐIỆN TỬ (ĐÃ FIX LỖI LẬT TRÊN IOS)
+       ============================================================ */
+    .card-stage { margin-top: 48px; display: flex; justify-content: center; perspective: 1400px; }
+
+    .ecard {
+      width: min(520px, 100%); aspect-ratio: 3 / 4; max-height: 640px;
+      position: relative; cursor: pointer; border-radius: var(--radius-lg);
+    }
+
+    .ecard-face {
+      position: absolute; inset: 0; border-radius: var(--radius-lg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: clamp(24px, 6vw, 44px); box-shadow: var(--shadow-card);
+      border: 1px solid rgba(212, 175, 55, 0.5); overflow: hidden;
+      /* Chuyển động mượt mà */
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* Mặt trước */
+    .ecard-front {
+      background: radial-gradient(circle at 50% 22%, rgba(212, 175, 55, 0.25), transparent 55%), linear-gradient(155deg, #8c1029, #6b0818 60%, #560716);
+      color: var(--cream);
+      opacity: 1;
+      transform: rotateY(0deg);
+      z-index: 2;
+    }
+
+    /* Mặt sau */
+    .ecard-back {
+      background: linear-gradient(160deg, #fffdf8, #fdf1dd);
+      color: var(--ink);
+      opacity: 0;
+      transform: rotateY(180deg); /* Lật ngược lại */
+      z-index: 1;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+
+    /* Trạng thái MỞ */
+    .ecard.open .ecard-front { opacity: 0; transform: rotateY(-180deg); z-index: 1; pointer-events: none; }
+    .ecard.open .ecard-back { opacity: 1; transform: rotateY(0deg); z-index: 2; pointer-events: auto; }
+
+    .ecard-front::after { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(212, 175, 55, 0.35); border-radius: calc(var(--radius-lg) - 8px); pointer-events: none; }
+    .ecard-front .seal { width: 82px; height: 82px; border-radius: 50%; display: grid; place-items: center; font-size: 2rem; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--red-dark); box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.15), 0 12px 30px rgba(0, 0, 0, 0.35); margin-bottom: 22px; animation: heartPulse 2.4s ease-in-out infinite; }
+    .ecard-front h3 { font-family: "Playfair Display", serif; font-size: clamp(1.3rem, 4.6vw, 1.7rem); line-height: 1.3; margin-bottom: 10px; }
+    .ecard-front p { font-size: 0.92rem; color: rgba(255, 248, 236, 0.78); max-width: 300px; }
+    .ecard-hint { margin-top: 26px; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); border: 1px dashed rgba(212, 175, 55, 0.55); border-radius: 999px; padding: 8px 18px; }
+
+    .ecard-back .back-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red-soft); margin-bottom: 14px; }
+    .ecard-back h3 { font-family: "Playfair Display", serif; font-size: clamp(1.2rem, 4.2vw, 1.5rem); color: var(--red-deep); margin-bottom: 14px; }
+    .ecard-back p { font-size: 0.95rem; color: rgba(58, 16, 23, 0.78); line-height: 1.75; }
+    .ecard-back .back-sign { margin-top: 22px; font-weight: 700; color: var(--red-soft); }
+    .ecard-close { margin-top: 20px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red-soft); padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(163, 36, 59, 0.4); transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+    .ecard-close:hover { background: var(--red-soft); color: var(--cream); }
+
+    /* ============================================================
+       13. FORM GỬI LỜI CHÚC
+       ============================================================ */
+    .wish-form-wrap { margin-top: 44px; background: rgba(255, 248, 236, 0.9); border: 1px solid rgba(212, 175, 55, 0.45); border-radius: var(--radius-lg); padding: clamp(24px, 5vw, 44px); box-shadow: var(--shadow-soft); backdrop-filter: blur(6px); }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-weight: 700; font-size: 0.85rem; color: var(--red-deep); margin-bottom: 8px; letter-spacing: 0.02em; }
+    .field input, .field textarea { width: 100%; font-family: inherit; font-size: 0.98rem; color: var(--ink); background: #fffdf8; border: 1.5px solid rgba(163, 36, 59, 0.25); border-radius: 14px; padding: 13px 16px; transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease); resize: vertical; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2); }
+    .field textarea { min-height: 120px; line-height: 1.65; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+    .btn-primary, .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 28px; border-radius: 999px; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s var(--ease); }
+    .btn-primary { color: var(--cream); background: linear-gradient(135deg, var(--red-soft), var(--red-deep)); box-shadow: 0 12px 28px rgba(122, 11, 30, 0.32); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(122, 11, 30, 0.4); }
+    .btn-ghost { color: var(--red-deep); background: rgba(212, 175, 55, 0.16); border: 1.5px solid rgba(212, 175, 55, 0.6); }
+    .btn-ghost:hover { background: rgba(212, 175, 55, 0.3); transform: translateY(-3px); }
+    .form-msg { margin-top: 14px; font-size: 0.85rem; font-weight: 600; color: var(--red-soft); min-height: 1.2em; }
+
+    /* ============================================================
+       14. CÁC THÀNH PHẦN NỔI (TOAST, NHẠC, PHÁO HOA)
+       ============================================================ */
+    #toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 1000; background: rgba(86, 7, 22, 0.95); color: var(--cream); font-weight: 600; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; border: 1px solid rgba(212, 175, 55, 0.5); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28); opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); max-width: calc(100vw - 36px); text-align: center; }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    #fireworksCanvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 950; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+    #fireworksCanvas.active { opacity: 1; }
+    .music-toggle { position: fixed; right: clamp(14px, 4vw, 26px); bottom: clamp(14px, 4vw, 26px); z-index: 900; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: var(--red-dark); background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 12px 28px rgba(212, 175, 55, 0.45); transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+    .music-toggle:hover { transform: scale(1.08); }
+    .music-toggle .icon { font-size: 1.3rem; line-height: 1; display: block; }
+    .music-toggle.playing .icon { animation: musicSpin 3.6s linear infinite; }
+    @keyframes musicSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* ============================================================
+       15. FOOTER
+       ============================================================ */
+    .footer { padding: clamp(40px, 7vw, 70px) clamp(18px, 5vw, 48px); text-align: center; background: linear-gradient(160deg, #560716, #7a0b1e); color: var(--cream); position: relative; overflow: hidden; }
+    .footer::before { content: ""; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(circle, rgba(212, 175, 55, 0.22), transparent 65%); pointer-events: none; }
+    .footer-title { font-family: "Playfair Display", serif; font-size: clamp(1.3rem, 4.6vw, 1.8rem); color: var(--gold-light); margin-bottom: 10px; }
+    .footer-text { font-size: 0.9rem; color: rgba(255, 248, 236, 0.72); max-width: 540px; margin: 0 auto 22px; }
+    .footer-signature { display: inline-block; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.16em; color: var(--gold-light); border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 999px; padding: 9px 22px; background: rgba(212, 175, 55, 0.08); }
+    .footer-signature .heart { color: #ff9fb4; animation: heartPulse 1.8s ease-in-out infinite; display: inline-block; }
+
+    /* ============================================================
+       16. RESPONSIVE
+       ============================================================ */
+    @media (max-width: 520px) {
+      .countdown-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .countdown-cell { padding: 10px 2px; }
+      .ecard { aspect-ratio: 3 / 4.2; }
+      .wish-panel::before { font-size: 3rem; top: 2px; left: 12px; }
+      .btn-row > * { flex: 1 1 100%; }
+      .music-toggle { width: 48px; height: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      #heartsCanvas { display: none !important; }
+      .credits-content { animation: none !important; top: 20% !important; transform: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ============================================================
+       MÀN HÌNH END CREDITS (TỰ ĐỘNG LƯỚT LÊN)
+       ============================================================ -->
+  <div id="endCredits">
+    <div class="credits-content">
+      <div class="credits-logo">✦ ✦ ✦</div>
+      <h1 class="credits-title">TRI ÂN THẦY CÔ</h1>
+      <p class="credits-subtitle">Ngày Nhà giáo Việt Nam 20/11</p>
+
+      <div class="credits-section">
+        <p class="credits-role">Đạo diễn &amp; Thiết kế</p>
+        <p class="credits-name">HQL_2311</p>
+        <p class="credits-desc">Full-Stack Developer &amp; UI/UX Designer</p>
+      </div>
+
+      <div class="credits-section">
+        <p class="credits-role">Kỹ thuật &amp; Lập trình</p>
+        <p class="credits-name">HTML5 · CSS3 · JavaScript</p>
+        <p class="credits-desc">Canvas API · Web Audio API</p>
+      </div>
+
+      <div class="credits-section">
+        <p class="credits-role">Cảm hứng</p>
+        <p class="credits-name">Những người thầy, người cô</p>
+        <p class="credits-desc">Đã dìu dắt bao thế hệ học trò</p>
+      </div>
+
+      <div class="credits-section">
+        <p class="credits-role">Lời tri ân đặc biệt</p>
+        <p class="credits-desc">
+          Cảm ơn thầy cô vì đã luôn kiên nhẫn,<br>
+          bao dung và trao đi tri thức.<br>
+          Mỗi bài giảng là một ngọn đèn,<br>
+          mỗi lời dạy là một hành trang.
+        </p>
+      </div>
+
+      <div class="credits-heart">❤</div>
+
+      <div class="credits-section">
+        <p class="credits-role">Nhà cung cấp</p>
+        <p class="credits-name">TikTok Shop IT</p>
+        <p class="credits-desc">@hql_2311_shop_it</p>
+      </div>
+
+      <p class="credits-footer">
+        Made with love by HQL_2311<br>
+        © 2024 All rights reserved.
+      </p>
+    </div>
+    
+    <button class="skip-credits" id="skipCredits">Bỏ qua ⏭</button>
+  </div>
+
+  <!-- ============================================================
+       CANVAS TRÁI TIM
+       ============================================================ -->
+  <canvas id="heartsCanvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       OVERLAY MỞ ĐẦU
+       ============================================================ -->
+  <div id="introOverlay" role="dialog" aria-label="Màn hình chúc mừng 20/11">
+    <div class="intro-inner">
+      <span class="intro-ribbon">20 · 11 · Ngày Nhà giáo Việt Nam</span>
+      <h1 class="intro-title">
+        Tri Ân <span class="gold">Thầy Cô</span>
+      </h1>
+      <p class="intro-sub">
+        Một món quà nhỏ gửi đến những người đã thắp sáng ước mơ<br />
+        và dìu dắt chúng ta trên mỗi bước đường.
+      </p>
+      <button id="introBtn" class="intro-btn" type="button">
+        <span class="intro-heart">❤</span> Mở thiệp tri ân
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NỘI DUNG CHÍNH
+       ============================================================ -->
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-ornament reveal" data-delay="1" aria-hidden="true">✦ ✦ ✦</div>
+        <span class="hero-tag reveal" data-delay="1">TRI ÂN THẦY CÔ 20/11</span>
+        <h1 class="hero-title reveal" data-delay="2">
+          Người thắp lửa<br />
+          <span class="gold">ước mơ</span>
+        </h1>
+        <p class="hero-sub reveal" data-delay="3">
+          Nhân ngày Nhà giáo Việt Nam 20/11, xin gửi đến quý thầy cô lời tri ân sâu sắc nhất.
+          Cảm ơn thầy cô đã trao đi tri thức, niềm tin và cả những yêu thương.
+        </p>
+        <div class="hero-date reveal" data-delay="4">
+          <span class="dot" aria-hidden="true"></span>
+          20 · 11 · Mãi khắc ghi
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="mouse"></span> Cuộn xuống
+      </div>
+    </section>
+
+    <!-- ĐỒNG HỒ ĐẾM NGƯỢC -->
+    <section class="section countdown-section" id="countdown">
+      <div class="container">
+        <div class="countdown-card reveal">
+          <p class="countdown-label">Đếm ngược đến ngày tri ân</p>
+          <h2 class="countdown-heading">20 / 11 – Ngày Nhà giáo Việt Nam</h2>
+          <div class="countdown-grid" role="timer" aria-live="polite">
+            <div class="countdown-cell">
+              <span class="countdown-num" id="cdDays">--</span>
+              <span class="countdown-unit">Ngày</span>
+            </div>
+            <div class="countdown-cell">
+              <span class="countdown-num" id="cdHours">--</span>
+              <span class="countdown-unit">Giờ</span>
+            </div>
+            <div class="countdown-cell">
+              <span class="countdown-num" id="cdMinutes">--</span>
+              <span class="countdown-unit">Phút</span>
+            </div>
+            <div class="countdown-cell">
+              <span class="countdown-num" id="cdSeconds">--</span>
+              <span class="countdown-unit">Giây</span>
+            </div>
+          </div>
+          <p class="countdown-note" id="countdownNote">
+            Mỗi khoảnh khắc trôi qua, lòng tri ân càng thêm đong đầy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LỜI CHÚC TYPEWRITER -->
+    <section class="section" id="wish">
+      <div class="container">
+        <div class="center">
+          <span class="section-eyebrow reveal">Lời chúc từ trái tim</span>
+          <h2 class="section-title reveal" data-delay="1">
+            Gửi đến <span class="gold">người thầy</span> kính yêu
+          </h2>
+        </div>
+        <div class="wish-panel reveal" data-delay="2">
+          <p class="typewriter" id="typewriter" aria-live="polite"></p>
+          <p class="wish-sign">— Những học trò thân thương</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section" id="timeline">
+      <div class="container">
+        <span class="section-eyebrow reveal">Dấu chân kỷ niệm</span>
+        <h2 class="section-title reveal" data-delay="1">
+          Hành trình <span class="gold">tri ân</span>
+        </h2>
+        <p class="section-desc reveal" data-delay="2">
+          Những mốc thời gian đẹp đẽ được ghi lại bằng sự biết ơn và tình cảm chân thành.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item reveal" data-delay="2">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <span class="timeline-year">Ngày đầu tiên</span>
+            <h3 class="timeline-title">Bỡ ngỡ bước vào lớp học</h3>
+            <p class="timeline-text">
+              Thầy cô đã đón chúng em bằng nụ cười ấm áp, mở ra một thế giới tri thức mới
+              và gieo những hạt giống đầu tiên của ước mơ.
+            </p>
+          </div>
+          <div class="timeline-item reveal" data-delay="3">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <span class="timeline-year">Mỗi ngày đến lớp</span>
+            <h3 class="timeline-title">Bài giảng và những bài học làm người</h3>
+            <p class="timeline-text">
+              Không chỉ là con chữ, thầy cô còn dạy chúng em cách đứng dậy sau vấp ngã,
+              cách yêu thương và sống có trách nhiệm.
+            </p>
+          </div>
+          <div class="timeline-item reveal" data-delay="4">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <span class="timeline-year">Ngày 20/11</span>
+            <h3 class="timeline-title">Lời tri ân dâng tặng</h3>
+            <p class="timeline-text">
+              Hôm nay, chúng em muốn nói rằng: cảm ơn thầy cô vì đã luôn ở đó,
+              kiên nhẫn và bao dung, trao đi mà không hề toan tính.
+            </p>
+          </div>
+          <div class="timeline-item reveal" data-delay="5">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <span class="timeline-year">Mãi về sau</span>
+            <h3 class="timeline-title">Lòng biết ơn không phai</h3>
+            <p class="timeline-text">
+              Dù năm tháng có trôi qua, những lời dạy hôm nay vẫn là hành trang
+              theo chúng em trên mọi nẻo đường.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="center">
+          <span class="section-eyebrow reveal">Khoảnh khắc đáng nhớ</span>
+          <h2 class="section-title reveal" data-delay="1">
+            Những <span class="gold">khung hình</span> thân thương
+          </h2>
+          <p class="section-desc reveal" data-delay="2">
+            Mỗi bức ảnh là một câu chuyện nhỏ về tình thầy trò – nơi ký ức được giữ lại
+            bằng yêu thương.
+          </p>
+        </div>
+        <div class="gallery">
+          <figure class="gallery-item reveal" data-delay="2" tabindex="0" role="img" aria-label="Kỷ niệm lớp học">
+            <svg viewBox="0 0 400 300" width="100%" height="100%" role="presentation">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbe3d4"/><stop offset="100%" stop-color="#f3c9b8"/></linearGradient></defs>
+              <rect width="400" height="300" fill="url(#g1)"/><circle cx="80" cy="70" r="34" fill="#d4af37" opacity=".35"/><circle cx="320" cy="220" r="48" fill="#7a0b1e" opacity=".12"/>
+              <text x="50%" y="48%" text-anchor="middle" font-family="Playfair Display, serif" font-size="30" fill="#7a0b1e" opacity=".85">Kỷ niệm</text>
+              <text x="50%" y="62%" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="16" fill="#a3243b" opacity=".8">Lớp học thân thương</text>
+            </svg>
+            <figcaption class="gallery-caption">Những ngày tháng bên nhau</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-delay="3" tabindex="0" role="img" aria-label="Kỷ niệm thầy cô">
+            <svg viewBox="0 0 400 300" width="100%" height="100%" role="presentation">
+              <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fdf1dd"/><stop offset="100%" stop-color="#f7dcc8"/></linearGradient></defs>
+              <rect width="400" height="300" fill="url(#g2)"/><circle cx="300" cy="80" r="44" fill="#d4af37" opacity=".3"/><circle cx="100" cy="230" r="36" fill="#a3243b" opacity=".12"/>
+              <text x="50%" y="48%" text-anchor="middle" font-family="Playfair Display, serif" font-size="30" fill="#7a0b1e" opacity=".85">Biết ơn</text>
+              <text x="50%" y="62%" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="16" fill="#a3243b" opacity=".8">Người thầy kính yêu</text>
+            </svg>
+            <figcaption class="gallery-caption">Tình thầy trò ấm áp</figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-delay="4" tabindex="0" role="img" aria-label="Kỷ niệm mái trường">
+            <svg viewBox="0 0 400 300" width="100%" height="100%" role="presentation">
+              <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbe3d4"/><stop offset="100%" stop-color="#fceada"/></linearGradient></defs>
+              <rect width="400" height="300" fill="url(#g3)"/><circle cx="200" cy="150" r="70" fill="#d4af37" opacity=".18"/><circle cx="60" cy="60" r="26" fill="#a3243b" opacity=".15"/>
+              <text x="50%" y="48%" text-anchor="middle" font-family="Playfair Display, serif" font-size="30" fill="#7a0b1e" opacity=".85">Mái trường</text>
+              <text x="50%" y="62%" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="16" fill="#a3243b" opacity=".8">Nơi ước mơ bắt đầu</text>
+            </svg>
+            <figcaption class="gallery-caption">Mái trường yêu dấu</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- LỜI TRI ÂN -->
+    <section class="section" id="thanks">
+      <div class="container">
+        <div class="center">
+          <span class="section-eyebrow reveal">Trái tim gửi trao</span>
+          <h2 class="section-title reveal" data-delay="1">
+            Lời <span class="gold">tri ân</span> chân thành
+          </h2>
+          <p class="section-desc reveal" data-delay="2">
+            Ba điều chúng em luôn muốn nói với thầy cô, hôm nay và mãi về sau.
+          </p>
+        </div>
+        <div class="thanks-grid">
+          <article class="thanks-card reveal" data-delay="2">
+            <div class="thanks-icon" aria-hidden="true">📖</div>
+            <h3>Cảm ơn vì tri thức</h3>
+            <p>Thầy cô đã mở ra những chân trời mới, dạy chúng em biết đọc, biết viết và biết ước mơ lớn hơn mỗi ngày.</p>
+          </article>
+          <article class="thanks-card reveal" data-delay="3">
+            <div class="thanks-icon" aria-hidden="true">🌱</div>
+            <h3>Cảm ơn vì sự kiên nhẫn</h3>
+            <p>Những lần chúng em sai, thầy cô không bỏ cuộc. Sự kiên nhẫn ấy đã dạy chúng em biết đứng dậy và cố gắng.</p>
+          </article>
+          <article class="thanks-card reveal" data-delay="4">
+            <div class="thanks-icon" aria-hidden="true">❤️</div>
+            <h3>Cảm ơn vì yêu thương</h3>
+            <p>Tình thương của thầy cô không ồn ào nhưng bền bỉ, đủ để sưởi ấm những ngày tháng học trò.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- THIỆP ĐIỆN TỬ -->
+    <section class="section" id="ecard">
+      <div class="container">
+        <div class="center">
+          <span class="section-eyebrow reveal">Thiệp điện tử</span>
+          <h2 class="section-title reveal" data-delay="1">
+            Mở <span class="gold">tấm thiệp</span> tri ân
+          </h2>
+          <p class="section-desc reveal" data-delay="2">
+            Nhấn vào tấm thiệp để mở ra lời chúc đặc biệt bên trong.
+          </p>
+        </div>
+        <div class="card-stage reveal" data-delay="3">
+          <div class="ecard" id="ecard" role="button" tabindex="0" aria-label="Nhấn để mở thiệp chúc mừng 20/11">
+            <div class="ecard-face ecard-front">
+              <div class="seal" aria-hidden="true">❤</div>
+              <h3>Gửi thầy cô<br />kính yêu</h3>
+              <p>Một tấm thiệp nhỏ chứa đựng tình cảm lớn lao.</p>
+              <span class="ecard-hint">Nhấn để mở</span>
+            </div>
+            <div class="ecard-face ecard-back">
+              <span class="back-eyebrow">20 · 11</span>
+              <h3>Lời tri ân từ trái tim</h3>
+              <p>
+                Cảm ơn thầy cô đã dành cả thanh xuân để dìu dắt bao thế hệ học trò.
+                Mỗi bài giảng là một ngọn đèn, mỗi lời dạy là một hành trang.
+                Chúng em sẽ luôn ghi nhớ và biết ơn.
+              </p>
+              <p class="back-sign">— Học trò của thầy cô</p>
+              <button class="ecard-close" id="ecardClose" type="button">Đóng thiệp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM GỬI LỜI CHÚC -->
+    <section class="section" id="send-wish">
+      <div class="container">
+        <div class="center">
+          <span class="section-eyebrow reveal">Gửi gắm yêu thương</span>
+          <h2 class="section-title reveal" data-delay="1">
+            Viết <span class="gold">lời chúc</span> của bạn
+          </h2>
+          <p class="section-desc reveal" data-delay="2">
+            Hãy để lại tên và lời chúc, rồi nhấn nút gửi để thắp lên pháo hoa tri ân.
+          </p>
+        </div>
+        <div class="wish-form-wrap reveal" data-delay="3">
+          <form id="wishForm" novalidate>
+            <div class="field">
+              <label for="senderName">Tên người gửi</label>
+              <input type="text" id="senderName" name="senderName" placeholder="Ví dụ: Minh Anh" maxlength="60" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="wishMessage">Lời chúc</label>
+              <textarea id="wishMessage" name="wishMessage" placeholder="Nhập lời chúc gửi đến thầy cô..." maxlength="500"></textarea>
+            </div>
+            <div class="btn-row">
+              <button type="submit" class="btn-primary" id="celebrateBtn">🎆 Gửi &amp; Chúc mừng</button>
+              <button type="button" class="btn-ghost" id="shareBtn">🔗 Chia sẻ lời chúc</button>
+            </div>
+            <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <h2 class="footer-title">Tri ân thầy cô – 20/11</h2>
+      <p class="footer-text">
+        Cảm ơn thầy cô vì đã là người dẫn đường, người truyền cảm hứng và là điểm tựa tinh thần cho bao thế hệ học trò.
+      </p>
+      <span class="footer-signature">
+        Made with <span class="heart" aria-hidden="true">❤</span> love – HQL_2311
+      </span>
+    </div>
+  </footer>
+
+  <!-- NÚT NHẠC NỀN -->
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Bật nhạc nền" title="Bật/tắt nhạc nền">
+    <span class="icon" aria-hidden="true">🎵</span>
+  </button>
+
+  <!-- CANVAS PHÁO HOA -->
+  <canvas id="fireworksCanvas" aria-hidden="true"></canvas>
+
+  <!-- TOAST -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const $ = (selector, scope = document) => scope.querySelector(selector);
+    const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+    /* ============================================================
+       1. MÀN HÌNH MỞ ĐẦU & END CREDITS
+       ============================================================ */
+    const introOverlay = $("#introOverlay");
+    const introBtn = $("#introBtn");
+    const endCredits = $("#endCredits");
+    const skipCredits = $("#skipCredits");
+    let introClosed = false;
+    let creditsTimeout = null;
+
+    function showEndCredits() {
+      // Hiện màn hình đen
+      endCredits.classList.add("active");
+      document.body.style.overflow = "hidden"; // Khoá cuộn trang chính
+
+      // Nếu không giảm chuyển động, đợi 35s (thời gian animation) rồi tự đóng
+      // Nếu giảm chuyển động, đợi 5s
+      const delay = prefersReducedMotion ? 5000 : 35000;
+      
+      creditsTimeout = setTimeout(() => {
+        closeEndCredits();
+      }, delay);
+    }
+
+    function closeEndCredits() {
+      endCredits.classList.remove("active");
+      document.body.style.overflow = ""; // Mở khoá cuộn
+      if (creditsTimeout) clearTimeout(creditsTimeout);
+      
+      // Bắt đầu typewriter và auto scroll sau khi credits đóng
+      startTypewriter();
+      if (typeof heartsController !== "undefined") {
+        heartsController.boost();
+      }
+      startAutoScroll();
+    }
+
+    function closeIntro() {
+      if (introClosed) return;
+      introClosed = true;
+      
+      // Ẩn màn hình chào
+      introOverlay.classList.add("hidden");
+      
+      // Hiện màn hình End Credits
+      showEndCredits();
+    }
+
+    introBtn.addEventListener("click", closeIntro);
+    document.body.style.overflow = "hidden";
+
+    introOverlay.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        closeIntro();
+      }
+    });
+
+    // Nút bỏ qua credits
+    skipCredits.addEventListener("click", closeEndCredits);
+
+    /* ============================================================
+       2. TỰ ĐỘNG LƯỚT LÊN (AUTO SCROLL TO TOP)
+       ============================================================ */
+    let autoScrollActive = false;
+    let autoScrollRaf = null;
+    let userInterrupted = false;
+
+    function startAutoScroll() {
+      if (userInterrupted) return;
+      if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
+
+      if (prefersReducedMotion) {
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      autoScrollActive = true;
+      const startY = window.scrollY || window.pageYOffset || 0;
+      if (startY <= 2) { autoScrollActive = false; return; }
+
+      const duration = Math.min(3000, Math.max(1200, startY * 1.2));
+      const startTime = performance.now();
+
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function step(now) {
+        if (!autoScrollActive || userInterrupted) { autoScrollActive = false; return; }
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        const targetY = startY * (1 - easeOutCubic(progress));
+        window.scrollTo(0, targetY);
+        if (progress < 1) {
+          autoScrollRaf = requestAnimationFrame(step);
+        } else {
+          window.scrollTo(0, 0);
+          autoScrollActive = false;
+        }
+      }
+      autoScrollRaf = requestAnimationFrame(step);
+    }
+
+    function interruptAutoScroll() {
+      if (!autoScrollActive) return;
+      autoScrollActive = false;
+      userInterrupted = true;
+      if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
+    }
+
+    window.addEventListener("wheel", interruptAutoScroll, { passive: true });
+    window.addEventListener("touchmove", interruptAutoScroll, { passive: true });
+    window.addEventListener("keydown", (e) => {
+      if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(e.key)) {
+        interruptAutoScroll();
+      }
+    });
+    window.addEventListener("mousedown", interruptAutoScroll, { passive: true });
+
+    /* ============================================================
+       3. SCROLL REVEAL (IntersectionObserver)
+       ============================================================ */
+    (function initScrollReveal() {
+      const elements = $$(".reveal");
+      if (!elements.length) return;
+      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        elements.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+      );
+      elements.forEach((el) => observer.observe(el));
+    })();
+
+    /* ============================================================
+       4. ĐỒNG HỒ ĐẾM NGƯỢC
+       ============================================================ */
+    (function initCountdown() {
+      const daysEl = $("#cdDays");
+      const hoursEl = $("#cdHours");
+      const minutesEl = $("#cdMinutes");
+      const secondsEl = $("#cdSeconds");
+      const noteEl = $("#countdownNote");
+      if (!daysEl) return;
+
+      function getTarget() {
+        const now = new Date();
+        const year = now.getFullYear();
+        let target = new Date(year, 10, 20, 0, 0, 0, 0);
+        if (now.getTime() > new Date(year, 10, 20, 23, 59, 59, 999).getTime()) {
+          target = new Date(year + 1, 10, 20, 0, 0, 0, 0);
+        }
+        return target;
+      }
+
+      function pad(n) { return String(n).padStart(2, "0"); }
+
+      function update() {
+        const now = new Date();
+        const target = getTarget();
+        let diff = target.getTime() - now.getTime();
+        const isToday = now.getDate() === 20 && now.getMonth() === 10 && now.getFullYear() === target.getFullYear();
+
+        if (isToday) {
+          daysEl.textContent = "00"; hoursEl.textContent = "00"; minutesEl.textContent = "00"; secondsEl.textContent = "00";
+          if (noteEl) noteEl.textContent = "Hôm nay là ngày 20/11 – Ngày Nhà giáo Việt Nam. Xin chúc mừng thầy cô!";
+          return;
+        }
+        if (diff < 0) diff = 0;
+        const totalSeconds = Math.floor(diff / 1000);
+        daysEl.textContent = pad(Math.floor(totalSeconds / 86400));
+        hoursEl.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+        minutesEl.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+        secondsEl.textContent = pad(totalSeconds % 60);
+      }
+      update();
+      setInterval(update, 1000);
+    })();
+
+    /* ============================================================
+       5. TYPEWRITER
+       ============================================================ */
+    const typewriterEl = $("#typewriter");
+    const WISH_TEXT = "Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi đến quý thầy cô lời tri ân sâu sắc nhất. Cảm ơn thầy cô đã trao đi tri thức, niềm tin và cả những yêu thương. Mong thầy cô luôn mạnh khoẻ, hạnh phúc và mãi là ngọn đèn soi sáng cho bao thế hệ học trò.";
+    let typewriterStarted = false;
+    let typewriterTimer = null;
+
+    function startTypewriter() {
+      if (typewriterStarted || !typewriterEl) return;
+      typewriterStarted = true;
+      if (prefersReducedMotion) { typewriterEl.textContent = WISH_TEXT; return; }
+
+      let index = 0;
+      const caret = document.createElement("span");
+      caret.className = "caret";
+      caret.setAttribute("aria-hidden", "true");
+
+      function type() {
+        if (index <= WISH_TEXT.length) {
+          typewriterEl.textContent = WISH_TEXT.slice(0, index);
+          typewriterEl.appendChild(caret);
+          index++;
+          const speed = index < 30 ? 38 : index < 120 ? 28 : 22;
+          typewriterTimer = setTimeout(type, speed);
+        } else {
+          setTimeout(() => { if (caret.parentNode === typewriterEl) caret.remove(); }, 2200);
+        }
+      }
+      type();
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && typewriterTimer) { clearTimeout(typewriterTimer); typewriterTimer = null; }
+      else if (!document.hidden && typewriterStarted && !typewriterTimer) {
+        if (typewriterEl && typewriterEl.textContent.length < WISH_TEXT.length) {
+          typewriterEl.textContent = WISH_TEXT;
+          const oldCaret = typewriterEl.querySelector(".caret");
+          if (oldCaret) oldCaret.remove();
+        }
+      }
+    });
+
+    /* ============================================================
+       6. THIỆP ĐIỆN TỬ (ĐÃ FIX LỖI)
+       ============================================================ */
+    (function initEcard() {
+      const ecard = $("#ecard");
+      const closeBtn = $("#ecardClose");
+      if (!ecard) return;
+      let isOpen = false;
+
+      function openCard() {
+        if (isOpen) return;
+        isOpen = true;
+        ecard.classList.add("open");
+        ecard.setAttribute("aria-label", "Thiệp đang mở. Nhấn để đóng");
+      }
+
+      function closeCard() {
+        if (!isOpen) return;
+        isOpen = false;
+        ecard.classList.remove("open");
+        ecard.setAttribute("aria-label", "Nhấn để mở thiệp chúc mừng 20/11");
+      }
+
+      ecard.addEventListener("click", (e) => {
+        if (e.target.closest("#ecardClose")) return;
+        if (isOpen) closeCard(); else openCard();
+      });
+
+      ecard.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (isOpen) closeCard(); else openCard(); }
+        if (e.key === "Escape") closeCard();
+      });
+
+      if (closeBtn) closeBtn.addEventListener("click", (e) => { e.stopPropagation(); closeCard(); });
+    })();
+
+    /* ============================================================
+       7. PHÁO HOA
+       ============================================================ */
+    const Fireworks = (function () {
+      const canvas = $("#fireworksCanvas");
+      if (!canvas || prefersReducedMotion) return { launch: () => {}, stop: () => {} };
+      const ctx = canvas.getContext("2d", { alpha: true });
+      let width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let particles = [], rafId = null, running = false, stopTimer = null;
+      const COLORS = ["#d4af37", "#f0d98c", "#ff9fb4", "#ff6b8a", "#fff8ec", "#a3243b"];
+
+      function resize() {
+        width = window.innerWidth; height = window.innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr); canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + "px"; canvas.style.height = height + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      function random(min, max) { return Math.random() * (max - min) + min; }
+      function createBurst(cx, cy) {
+        const count = Math.floor(random(26, 44));
+        const baseColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+        for (let i = 0; i < count; i++) {
+          const angle = (Math.PI * 2 * i) / count + random(-0.16, 0.16);
+          const speed = random(1.6, 5.4);
+          particles.push({ x: cx, y: cy, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: random(52, 88), maxLife: 88, color: Math.random() < 0.7 ? baseColor : COLORS[Math.floor(Math.random() * COLORS.length)], size: random(1.4, 3.2) });
+        }
+      }
+      function loop() {
+        if (!running) return;
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx; p.y += p.vy; p.vy += 0.045; p.vx *= 0.985; p.vy *= 0.985; p.life -= 1;
+          if (p.life <= 0) { particles.splice(i, 1); continue; }
+          const alpha = Math.max(0, p.life / p.maxLife);
+          ctx.globalAlpha = alpha; ctx.fillStyle = p.color;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+          ctx.globalAlpha = alpha * 0.35; ctx.beginPath(); ctx.arc(p.x - p.vx * 1.4, p.y - p.vy * 1.4, p.size * 0.8, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        if (particles.length > 0) rafId = requestAnimationFrame(loop);
+        else { running = false; canvas.classList.remove("active"); }
+      }
+      function launch() {
+        if (running) { createBurst(random(width * 0.2, width * 0.8), random(height * 0.18, height * 0.5)); return; }
+        resize(); canvas.classList.add("active"); particles = []; running = true;
+        [{ x: width * 0.3, y: height * 0.32, delay: 0 }, { x: width * 0.7, y: height * 0.26, delay: 180 }, { x: width * 0.5, y: height * 0.42, delay: 360 }].forEach((pos) => {
+          setTimeout(() => { if (running) createBurst(pos.x, pos.y); }, pos.delay);
+        });
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(loop);
+        if (stopTimer) clearTimeout(stopTimer);
+        stopTimer = setTimeout(() => { if (particles.length === 0) { running = false; canvas.classList.remove("active"); } }, 4200);
+      }
+      function stop() { running = false; particles = []; if (rafId) cancelAnimationFrame(rafId); canvas.classList.remove("active"); ctx.clearRect(0, 0, width, height); }
+      window.addEventListener("resize", () => { if (running) resize(); });
+      return { launch, stop };
+    })();
+
+    /* ============================================================
+       8. TOAST & FORM & CHIA SẺ
+       ============================================================ */
+    const toastEl = $("#toast");
+    let toastTimer = null;
+    function showToast(message, duration = 2800) {
+      if (!toastEl) return;
+      toastEl.textContent = message; toastEl.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toastEl.classList.remove("show"); }, duration);
+    }
+
+    (function initWishForm() {
+      const form = $("#wishForm");
+      if (!form) return;
+      const nameInput = $("#senderName");
+      const msgInput = $("#wishMessage");
+      const formMsg = $("#formMsg");
+      const shareBtn = $("#shareBtn");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = nameInput.value.trim();
+        const message = msgInput.value.trim();
+        if (!name) { formMsg.textContent = "Vui lòng nhập tên người gửi."; nameInput.focus(); return; }
+        if (!message) { formMsg.textContent = "Vui lòng nhập lời chúc."; msgInput.focus(); return; }
+        formMsg.textContent = "";
+        Fireworks.launch();
+        if (typeof heartsController !== "undefined") heartsController.boost();
+        showToast(`Cảm ơn ${name} đã gửi lời chúc tri ân! ❤`);
+      });
+
+      if (shareBtn) {
+        shareBtn.addEventListener("click", async () => {
+          const name = nameInput.value.trim();
+          const message = msgInput.value.trim();
+          const shareText = message ? `Lời chúc 20/11 từ ${name || "một học trò"}: "${message}"` : "Cùng gửi lời tri ân đến thầy cô nhân ngày Nhà giáo Việt Nam 20/11 ❤";
+          const shareData = { title: "TRI ÂN THẦY CÔ 20/11", text: shareText, url: window.location.href };
+          try {
+            if (navigator.share && (!navigator.canShare || navigator.canShare(shareData))) {
+              await navigator.share(shareData);
+              showToast("Đã mở hộp thoại chia sẻ.");
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
+              showToast("Đã sao chép lời chúc và liên kết!");
+            } else {
+              const temp = document.createElement("textarea");
+              temp.value = `${shareText}\n${window.location.href}`;
+              temp.style.position = "fixed"; temp.style.opacity = "0";
+              document.body.appendChild(temp); temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+              showToast("Đã sao chép lời chúc và liên kết!");
+            }
+          } catch (err) {
+            if (err.name !== "AbortError") showToast("Không thể chia sẻ tự động. Vui lòng sao chép thủ công.");
+          }
+        });
+      }
+    })();
+
+    /* ============================================================
+       9. NHẠC NỀN
+       ============================================================ */
+    const MusicPlayer = (function () {
+      const toggleBtn = $("#musicToggle");
+      let audioCtx = null, isPlaying = false, masterGain = null, melodyTimer = null, noteIndex = 0;
+      const MELODY = [392.0, 440.0, 523.25, 587.33, 659.25, 587.33, 523.25, 440.0, 392.0, 349.23, 392.0, 440.0];
+      const NOTE_DURATION = 0.62;
+
+      function createContext() {
+        if (audioCtx) return;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        audioCtx = new AC();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = 0.07;
+        masterGain.connect(audioCtx.destination);
+      }
+      function playNote(freq, time, duration) {
+        if (!audioCtx || !masterGain) return;
+        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        osc.type = "sine"; osc.frequency.setValueAtTime(freq, time);
+        gain.gain.setValueAtTime(0, time);
+        gain.gain.linearRampToValueAtTime(0.9, time + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+        osc.connect(gain); gain.connect(masterGain);
+        osc.start(time); osc.stop(time + duration + 0.05);
+      }
+      function scheduleNext() {
+        if (!isPlaying || !audioCtx) return;
+        const freq = MELODY[noteIndex % MELODY.length];
+        const now = audioCtx.currentTime;
+        playNote(freq, now, NOTE_DURATION);
+        if (noteIndex % 3 === 0) playNote(freq * 2, now + 0.02, NOTE_DURATION * 0.8);
+        noteIndex++;
+        melodyTimer = setTimeout(scheduleNext, NOTE_DURATION * 1000);
+      }
+      function start() {
+        createContext(); if (!audioCtx) return;
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        isPlaying = true; noteIndex = 0;
+        toggleBtn.classList.add("playing");
+        toggleBtn.setAttribute("aria-label", "Tắt nhạc nền");
+        toggleBtn.querySelector(".icon").textContent = "🎶";
+        if (melodyTimer) clearTimeout(melodyTimer);
+        melodyTimer = setTimeout(scheduleNext, 120);
+      }
+      function stop() {
+        isPlaying = false;
+        toggleBtn.classList.remove("playing");
+        toggleBtn.setAttribute("aria-label", "Bật nhạc nền");
+        toggleBtn.querySelector(".icon").textContent = "🎵";
+        if (melodyTimer) { clearTimeout(melodyTimer); melodyTimer = null; }
+        if (audioCtx && audioCtx.state === "running") audioCtx.suspend();
+      }
+      if (toggleBtn) toggleBtn.addEventListener("click", () => { if (isPlaying) stop(); else start(); });
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && isPlaying) { if (audioCtx && audioCtx.state === "running") audioCtx.suspend(); }
+        else if (!document.hidden && isPlaying) { if (audioCtx && audioCtx.state === "suspended") audioCtx.resume(); }
+      });
+      window.addEventListener("pagehide", () => { if (isPlaying) stop(); });
+      return { start, stop };
+    })();
+
+    /* ============================================================
+       10. TRÁI TIM BAY
+       ============================================================ */
+    const heartsController = (function () {
+      const canvas = $("#heartsCanvas");
+      if (!canvas || prefersReducedMotion) {
+        if (canvas) canvas.style.display = "none";
+        return { boost: () => {} };
+      }
+      const ctx = canvas.getContext("2d", { alpha: true });
+      let width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let hearts = [], rafId = null, running = false, boostUntil = 0;
+
+      function getHeartCount() { return Math.max(18, Math.min(70, Math.round((window.innerWidth * window.innerHeight) / 14000))); }
+      const HEART_COLORS = ["#a3243b", "#e0416a", "#ff9fb4", "#f4c9d8", "#d4af37", "#f0d98c"];
+      function random(min, max) { return Math.random() * (max - min) + min; }
+      function createHeart(isInitial = false) {
+        const size = random(6, 18);
+        return { x: random(0, width), y: isInitial ? random(0, height) : height + size * 2, size, speedY: random(0.25, 0.85) * (size / 10), driftX: random(-0.35, 0.35), phase: random(0, Math.PI * 2), phaseSpeed: random(0.004, 0.012), opacity: random(0.25, 0.75), color: HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)], glow: Math.random() < 0.3, glowPulse: random(0.5, 1.5), pulseSpeed: random(0.02, 0.06) };
+      }
+      function resize() {
+        width = window.innerWidth; height = window.innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr); canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + "px"; canvas.style.height = height + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const targetCount = getHeartCount();
+        if (hearts.length > targetCount) hearts = hearts.slice(0, targetCount);
+        else while (hearts.length < targetCount) hearts.push(createHeart(true));
+      }
+      function drawHeart(ctx, x, y, size, rotation) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(rotation);
+        const s = size / 16;
+        ctx.beginPath();
+        ctx.moveTo(0, 4 * s);
+        ctx.bezierCurveTo(0, 1 * s, -4 * s, -4 * s, -8 * s, -4 * s);
+        ctx.bezierCurveTo(-13 * s, -4 * s, -13 * s, 3 * s, -8 * s, 7 * s);
+        ctx.bezierCurveTo(-4 * s, 10 * s, 0, 13 * s, 0, 16 * s);
+        ctx.bezierCurveTo(0, 13 * s, 4 * s, 10 * s, 8 * s, 7 * s);
+        ctx.bezierCurveTo(13 * s, 3 * s, 13 * s, -4 * s, 8 * s, -4 * s);
+        ctx.bezierCurveTo(4 * s, -4 * s, 0, 1 * s, 0, 4 * s);
+        ctx.closePath(); ctx.restore();
+      }
+      function loop(timestamp) {
+        if (!running) return;
+        ctx.clearRect(0, 0, width, height);
+        const isBoost = timestamp < boostUntil;
+        const multiplier = isBoost ? 1.8 : 1;
+        for (let i = 0; i < hearts.length; i++) {
+          const h = hearts[i];
+          h.phase += h.phaseSpeed; h.y -= h.speedY * multiplier; h.x += Math.sin(h.phase) * 0.45 + h.driftX * 0.4;
+          if (h.y < -h.size * 2 || h.x < -60 || h.x > width + 60) { hearts[i] = createHeart(false); continue; }
+          let glowAlpha = 0;
+          if (h.glow) { h.glowPulse += h.pulseSpeed; glowAlpha = 0.35 + Math.sin(h.glowPulse) * 0.25; if (glowAlpha < 0) glowAlpha = 0; }
+          ctx.save(); ctx.globalAlpha = h.opacity;
+          if (h.glow && glowAlpha > 0) { ctx.shadowColor = h.color; ctx.shadowBlur = h.size * 1.6 * glowAlpha; }
+          ctx.fillStyle = h.color; drawHeart(ctx, h.x, h.y, h.size, Math.sin(h.phase) * 0.12); ctx.fill(); ctx.restore();
+        }
+        rafId = requestAnimationFrame(loop);
+      }
+      function start() { if (running) return; running = true; resize(); rafId = requestAnimationFrame(loop); }
+      function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
+      function boost() { boostUntil = performance.now() + 2600; }
+      window.addEventListener("resize", () => { if (running) { if (resize._raf) cancelAnimationFrame(resize._raf); resize._raf = requestAnimationFrame(resize); } });
+      document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); else start(); });
+      start();
+      return { boost };
+    })();
+
+    /* ============================================================
+       11. DỌN DẸP
+       ============================================================ */
+    if (prefersReducedMotion && typewriterEl) typewriterEl.textContent = WISH_TEXT;
+    window.addEventListener("pagehide", () => {
+      Fireworks.stop();
+      if (typewriterTimer) clearTimeout(typewriterTimer);
+      if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
+      if (creditsTimeout) clearTimeout(creditsTimeout);
+    });
+  </script>
+</body>
+</html>
